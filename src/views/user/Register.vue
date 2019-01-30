@@ -106,12 +106,14 @@ export default {
         min: 6,
         max: 25,
         notWhitespace: true,
+        pattern: /^[\u4E00-\u9FA5A-Za-z0-9_]+$/,
       },
       passwordRule: {
         required: true,
         min: 8,
         max: 25,
         notWhitespace: true,
+        pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,25}$/,
       },
       rPasswordRule: {
         required: true,
@@ -135,11 +137,13 @@ export default {
         required: '用户名不能为空',
         min: '用户名至少为6位',
         max: '用户名不能超过25位',
+        pattern: '只能输入中文，英文，数字以及下划线',
       },
       passwordMsg: {
         required: '密码不能为空',
-        min: '密码至少为6位',
+        min: '密码至少为8位',
         max: '密码不能超过25位',
+        pattern: '密码必须包含大小写字母和数字的组合，不能使用特殊字符',
       },
       rPasswordMsg: {
         required: '二次密码不能为空',
