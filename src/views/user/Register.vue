@@ -113,7 +113,7 @@ export default {
         min: 8,
         max: 25,
         notWhitespace: true,
-        pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,25}$/,
+        pattern: /^(?=.*\d)(?=.*[a-zA-Z]).{8,25}$/,
       },
       rPasswordRule: {
         required: true,
@@ -143,7 +143,7 @@ export default {
         required: '密码不能为空',
         min: '密码至少为8位',
         max: '密码不能超过25位',
-        pattern: '密码必须包含大小写字母和数字的组合，不能使用特殊字符',
+        pattern: '密码必须包含字母和数字，不能使用特殊字符',
       },
       rPasswordMsg: {
         required: '二次密码不能为空',
@@ -158,8 +158,8 @@ export default {
       emailCodeMsg: {
         required: '邮箱验证码不能为空',
         isFalse: '邮箱验证码错误',
-        min: '图形验证码错误',
-        max: '图形验证码错误',
+        min: '邮箱验证码错误',
+        max: '邮箱验证码错误',
       },
       emailError: '', // 邮箱错误提示信息
       emailTrue: false, // 邮箱正确
