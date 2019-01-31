@@ -219,7 +219,6 @@ export default {
       codeImgUrl: null,
       emailCodeText: '发送验证码',
       emailCodeLoding: false, // 邮箱验证码按钮是否显示loading
-      emailButtonName: '发送验证码', // 邮箱验证码发送按钮名称
     };
   },
   methods: {
