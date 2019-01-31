@@ -19,11 +19,19 @@ export default {
     });
   },
 
-  // 获取验证码
+  // 获取图形验证码
   getCaptcha() {
     return axios({
       method: 'get',
-      url: '/api/getcaptcha',
+      url: '/api/getcaptcha/verify',
+    });
+  },
+
+  // 校验图形验证码
+  checkCaptcha(code) {
+    return axios({
+      method: 'get',
+      url: `api/getcaptcha/check/${code}`,
     });
   },
 

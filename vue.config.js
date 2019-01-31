@@ -43,9 +43,14 @@ module.exports = {
   },
 
   devServer: {
-    proxy: 'http://jw.tt/',
+    proxy: {
+      '/api': {
+        target: 'http://jw.tt',
+        ws: true,
+        changeOrigin: true,
+      },
+    },
   },
-
   css: {
     loaderOptions: {
       stylus: {
