@@ -24,7 +24,7 @@
         label="注册"
         value="register"
       >
-        <register></register>
+        <register @to-login="toLogin"></register>
       </cube-tab-panel>
       <cube-tab-panel
         label="登陆"
@@ -48,8 +48,14 @@ export default {
   name: 'Index',
   data() {
     return {
-      selectedLabel: 'login',
+      selectedLabel: this.$route.params.type || 'login',
     };
+  },
+  methods: {
+    toLogin() {
+      console.log('chu');
+      this.selectedLabel = 'login';
+    },
   },
 };
 </script>
