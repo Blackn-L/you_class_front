@@ -232,7 +232,7 @@ export default {
       if (!this.checkAll()) {
         return false;
       }
-      let toast = this.$createToast({
+      const toast = this.$createToast({
         txt: '图形验证码错误',
         type: 'error',
       });
@@ -246,17 +246,15 @@ export default {
           this.emailCodeLoding = true;
           api.sendEmailCode().then(({ data }) => {
             if (data.Code === 200) {
-              toast = this.$createToast({
+              this.$createToast({
                 txt: '发送成功',
                 type: 'correct',
-              });
-              toast.show();
+              }).show();
             } else {
-              toast = this.$createToast({
+              this.$createToast({
                 txt: '发送失败',
                 type: 'error',
-              });
-              toast.show();
+              }).show();
             }
           });
           const wait = 60;
@@ -317,17 +315,15 @@ export default {
       };
       api.register(body).then(({ data }) => {
         if (data.Code === 200) {
-          const toast = this.$createToast({
+          this.$createToast({
             txt: '注册成功',
             type: 'success',
-          });
-          toast.show();
+          }).show();
         } else {
-          const toast = this.$createToast({
+          this.$createToast({
             txt: data.Msg,
             type: 'error',
-          });
-          toast.show();
+          }).show();
         }
         this.getCaptcha();
       });
