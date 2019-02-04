@@ -11,12 +11,17 @@ export default new Router({
     component: Home,
   },
   {
-    path: '/user/:type',
-    name: 'user',
+    path: '/account/:type',
+    name: 'account',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import('./views/user/Index.vue'),
+  },
+  {
+    path: '/user/center',
+    name: 'user_center',
+    component: () => import('@/views/user/UserCenter.vue'),
   },
   ],
 });

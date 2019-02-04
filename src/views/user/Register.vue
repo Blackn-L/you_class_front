@@ -155,7 +155,7 @@ export default {
         },
         usernameRule: {
           required: true,
-          min: 6,
+          min: 3,
           max: 25,
           notWhitespace: true,
           pattern: /^[\u4E00-\u9FA5A-Za-z0-9_]+$/,
@@ -190,7 +190,7 @@ export default {
         usernameMsg: {
           required: '用户名不能为空',
           notWhitespace: '用户名不能为空',
-          min: '用户名至少为6位',
+          min: '用户名至少为3位',
           max: '用户名不能超过25位',
           pattern: '只能输入中文，英文，数字以及下划线',
         },
@@ -326,6 +326,8 @@ export default {
           }).show();
         }
         this.getCaptcha();
+      }).catch((e) => {
+        console.log(e);
       });
       return true;
     },

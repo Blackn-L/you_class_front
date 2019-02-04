@@ -158,19 +158,22 @@ export default {
       };
       api.login(body).then(({ data }) => {
         if (data.Code === 200) {
-          const toast = this.$createToast({
+          this.$createToast({
             txt: '登陆成功',
             type: 'success',
+          }).show();
+          this.$router.push({
+            name: 'user_center',
           });
-          toast.show();
         } else {
-          const toast = this.$createToast({
+          this.$createToast({
             txt: data.Msg,
             type: 'error',
-          });
-          toast.show();
+          }).show();
         }
         this.getCaptcha();
+      }).catch((e) => {
+        console.log(e);
       });
       return true;
     },

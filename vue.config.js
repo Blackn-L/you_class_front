@@ -38,14 +38,14 @@ module.exports = {
   },
 
   chainWebpack: (config) => {
-    config.resolve.alias
-      .set('@', resolve('src'));
+    config.resolve.alias.set('@', resolve('src'));
   },
 
   devServer: {
     proxy: {
       '/api': {
         target: 'http://jw.tt',
+        // target: 'http://class.blackn.xyz',
         ws: true,
         changeOrigin: true,
       },
@@ -55,9 +55,7 @@ module.exports = {
     loaderOptions: {
       stylus: {
         'resolve url': true,
-        import: [
-          './src/theme',
-        ],
+        import: ['./src/theme'],
       },
     },
   },
