@@ -43,4 +43,21 @@ export default {
       data: body,
     });
   },
+
+  // 获取用户个人信息
+  getUserInfo() {
+    return axios({
+      method: 'get',
+      url: '/api/getuserinfo',
+    });
+  },
+
+  // 修改个人信息
+  saveUserInfo(body) {
+    return axios({
+      method: 'post',
+      url: '/api/saveuserinfo',
+      data: body,
+    });
+  },
 };
