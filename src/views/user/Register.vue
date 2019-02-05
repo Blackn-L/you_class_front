@@ -256,6 +256,12 @@ export default {
                 type: 'error',
               }).show();
             }
+          }).catch((e) => {
+            this.$createToast({
+              txt: '网络错误',
+              type: 'error',
+            }).show();
+            console.log(e);
           });
           const wait = 60;
           this.countDown(wait);
@@ -327,6 +333,10 @@ export default {
         }
         this.getCaptcha();
       }).catch((e) => {
+        this.$createToast({
+          txt: '网络错误',
+          type: 'error',
+        }).show();
         console.log(e);
       });
       return true;

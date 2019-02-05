@@ -173,6 +173,10 @@ export default {
         }
         this.getCaptcha();
       }).catch((e) => {
+        this.$createToast({
+          txt: '网络错误',
+          type: 'error',
+        }).show();
         console.log(e);
       });
       return true;

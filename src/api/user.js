@@ -23,7 +23,7 @@ export default {
   getCaptcha() {
     return axios({
       method: 'get',
-      url: '/api/getcaptcha/verify',
+      url: '/api/getCaptcha/verify',
     });
   },
 
@@ -31,7 +31,7 @@ export default {
   checkCaptcha(code) {
     return axios({
       method: 'get',
-      url: `api/getcaptcha/check/${code}`,
+      url: `api/getCaptcha/check/${code}`,
     });
   },
 
@@ -48,7 +48,7 @@ export default {
   getUserInfo() {
     return axios({
       method: 'get',
-      url: '/api/getuserinfo',
+      url: '/api/getUserInfo',
     });
   },
 
@@ -56,8 +56,31 @@ export default {
   saveUserInfo(body) {
     return axios({
       method: 'post',
-      url: '/api/saveuserinfo',
+      url: '/api/updateUserInfo',
       data: body,
+    });
+  },
+  // 校验密码是否正确
+  checkPwd(body) {
+    return axios({
+      method: 'post',
+      url: '/api/checkPwd',
+      data: body,
+    });
+  },
+  // 更新密码
+  updatePwd(body) {
+    return axios({
+      method: 'post',
+      url: '/api/updatePwd',
+      data: body,
+    });
+  },
+  // 登出
+  loginOut() {
+    return axios({
+      method: 'get',
+      url: '/api/loginOut',
     });
   },
 };
