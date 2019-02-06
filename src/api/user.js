@@ -60,6 +60,14 @@ export default {
       data: body,
     });
   },
+  // 修改教务账号密码
+  updateStuInfo(body) {
+    return axios({
+      method: 'post',
+      url: '/api/updateStuInfo',
+      data: body,
+    });
+  },
   // 校验密码是否正确
   checkPwd(body) {
     return axios({

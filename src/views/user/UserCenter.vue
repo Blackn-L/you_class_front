@@ -1,7 +1,7 @@
 <template>
   <page
     title="用户中心"
-    desc="上次登陆时间登陆IP"
+    :desc="userInfo.lastLoginIp"
   >
 
     <div
@@ -12,6 +12,7 @@
         <cube-input
           disabled
           v-model="userInfo.createTime"
+          placeholder="信息待补充"
           class="row-input"
         >
 
@@ -26,6 +27,7 @@
         <cube-input
           v-model="userInfo.username"
           :disabled='!canEdit'
+          placeholder="信息待补充"
           class="row-input"
         >
 
@@ -40,6 +42,7 @@
         <cube-input
           v-model="userInfo.email"
           :disabled='!canEdit'
+          placeholder="信息待补充"
           class="row-input"
         >
 
@@ -55,6 +58,8 @@
         <cube-input
           v-model="userInfo.mobile"
           :disabled='!canEdit'
+          placeholder="信息待补充"
+          type="number"
           class="row-input"
         >
 
@@ -69,7 +74,7 @@
         <cube-input
           v-model="userInfo.wechat"
           :disabled='!canEdit'
-          type="number"
+          placeholder="信息待补充"
           class="row-input"
         >
 
@@ -83,7 +88,8 @@
       <div class="row">
         <cube-input
           v-model="userInfo.studentId"
-          :disabled='!canEdit'
+          disabled
+          placeholder="信息待补充"
           class="row-input"
         >
 
@@ -160,16 +166,22 @@ export default {
         mobile: null,
         wechat: null,
         studentId: null, // 教务账号
+        lastLoginIp: null, // 上次登陆IP
       },
+      errorToast: this.$createToast({
+        type: 'warn',
+        time: 2000,
+        txt: '网络错误！',
+      }, false), // api请求，网络错误提示
     };
   },
   methods: {
     // 获取个人信息
     getUserInfo() {
       api.getUserInfo().then(({ data }) => {
-        console.log(data);
         if (data.Code === 200) {
           this.userInfo = data.Data;
+          console.log(data.Data);
         } else {
           this.$createToast({
             txt: data.Msg,
@@ -183,12 +195,10 @@ export default {
           }, 1000);
         }
       }).catch((e) => {
-        this.$createToast({
-          txt: '网络错误',
-          type: 'error',
-        }).show();
+        this.errorToast.show();
         console.log(e);
       });
+      this.canEdit = false;
     },
     // 更新密码
     updatePwd() {
@@ -217,11 +227,7 @@ export default {
               }
             }).catch((error) => {
               console.log(error);
-              this.$createToast({
-                type: 'warn',
-                time: 1000,
-                txt: '网络错误！',
-              }).show();
+              this.errorToast.show();
             });
           } else {
             this.$createToast({
@@ -231,7 +237,7 @@ export default {
             }).show();
           }
         },
-      }).show();
+      }, false).show();
     },
     // 设置新密码
     setNewPwd() {
@@ -240,12 +246,11 @@ export default {
         type: 'prompt',
         title: '设置新密码',
         prompt: {
-          value: '',
           placeholder: '请输入新密码',
           eye: { open: false, reverse: false },
           type: 'password',
         },
-        onConfirm: (ee, inputValue) => {
+        onConfirm: (e, inputValue) => {
           const newPwd = inputValue;
           if (!re.test(newPwd)) {
             this.$createToast({
@@ -278,39 +283,80 @@ export default {
               }
             }).catch((error) => {
               console.log(error);
-              this.$createToast({
-                type: 'warn',
-                time: 1000,
-                txt: '网络错误！',
-              });
+              this.errorToast.show();
             });
           }
-          // this.$createDialog({
-          //   type: 'prompt',
-          //   title: '设置新密码',
-          //   prompt: {
-          //     rNewPwd: '',
-          //     placeholder: '请再次输入新密码',
-          //     eye: { open: false, reverse: false },
-          //     type: 'password',
-          //   },
-          //   onConfirm: (event, value) => {
-          //     if (newPwd !== value) {
-          //       this.$createToast({
-          //         type: 'warn',
-          //         time: 1000,
-          //         txt: '两次密码不相同！',
-          //       }).show();
-          //     }
-          //   },
-          // });
         },
-      });
+      }, false);
       newPwdDialog.show();
     },
     // 修改教务信息
     updateStuInfo() {
-
+      this.$createDialog({
+        type: 'prompt',
+        title: '修改教务信息',
+        prompt: {
+          placeholder: '请输入教务账号',
+          clearable: { visible: true, blurHidden: true },
+        },
+        onConfirm: (e, inputValue) => {
+          if (inputValue && inputValue.length > 0) {
+            this.updateStuPwd(inputValue);
+          } else {
+            this.$createToast({
+              type: 'warn',
+              time: 2000,
+              txt: '请输入正确的教务账号',
+            }).show();
+          }
+        },
+      }, false).show();
+    },
+    // 修改教务密码
+    updateStuPwd(stuId) {
+      this.$createDialog({
+        type: 'prompt',
+        title: '修改教务信息',
+        prompt: {
+          placeholder: '请输入教务密码',
+          type: 'password',
+          clearable: { visible: true, blurHidden: true },
+          eye: { open: false, reverse: false },
+        },
+        onConfirm: (e, inputValue) => {
+          if (inputValue && inputValue.length > 0) {
+            const body = {
+              studentId: stuId,
+              studentPwd: inputValue,
+            };
+            api.updateStuInfo(body).then(({ data }) => {
+              if (data.Code === 200) {
+                this.$createToast({
+                  type: 'success',
+                  time: 2000,
+                  txt: '更新成功',
+                }).show();
+                this.getUserInfo();
+              } else {
+                this.$createToast({
+                  type: 'warn',
+                  time: 2000,
+                  txt: data.Msg,
+                }).show();
+              }
+            }).catch((error) => {
+              this.errorToast.show();
+              console.log(error);
+            });
+          } else {
+            this.$createToast({
+              type: 'error',
+              time: 2000,
+              txt: '请输入正确的密码！',
+            }).show();
+          }
+        },
+      }, false).show();
     },
     // 保存个人信息修改
     save() {
@@ -345,10 +391,7 @@ export default {
           }).show();
         }
       }).catch((e) => {
-        this.$createToast({
-          txt: '网络错误',
-          type: 'error',
-        }).show();
+        this.errorToast.show();
         console.log(e);
       });
     },
@@ -368,10 +411,7 @@ export default {
           }, 1000);
         }
       }).catch((e) => {
-        this.$createToast({
-          txt: '网络错误',
-          type: 'error',
-        }).show();
+        this.errorToast.show();
         console.log(e);
       });
     },
