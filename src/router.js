@@ -23,5 +23,10 @@ export default new Router({
     name: 'user_center',
     component: () => import('@/views/user/UserCenter.vue'),
   },
+  {
+    path: '/main',
+    name: 'main',
+    component: () => import('@/views/Main.vue'),
+  },
   ],
 });
