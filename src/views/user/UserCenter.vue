@@ -187,12 +187,15 @@ export default {
             txt: data.Msg,
             type: 'error',
           }).show();
-          setTimeout(() => {
-            this.$router.push({
-              name: 'account',
-              params: 'login',
-            });
-          }, 1000);
+          // 300为未登陆
+          if (data.Code === 300) {
+            setTimeout(() => {
+              this.$router.push({
+                name: 'account',
+                params: 'login',
+              });
+            }, 1000);
+          }
         }
       }).catch((e) => {
         this.errorToast.show();
