@@ -133,7 +133,7 @@
           :disabled="!canEdit"
           @click="save"
         >
-          {{canEdit ? '保存' : '滑动修改'}}
+          {{canEdit ? '保存' : '滑动编辑'}}
         </cube-button>
       </div>
       <div class="row-footer">
