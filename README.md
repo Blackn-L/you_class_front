@@ -1,29 +1,13 @@
-# your_class_front
+此项目为`YourClass`的前端项目
 
-## Project setup
-```
-npm install
-```
+使用Vue Cli 3搭建
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+目前使用以下插件
 
-### Compiles and minifies for production
-```
-npm run build
-```
+* Vue-Router
+* EsLint(airbnb)
+* element-ui
+* cube-ui
+* axios
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+目前持续开发ing  -- 19.02.27
