@@ -64,6 +64,12 @@
         登陆
       </cube-button>
     </div>
+    <div
+      class="row"
+      @click="forgetPwd"
+    >
+      <p style="font-size: 16px;">忘记密码</p>
+    </div>
 
   </div>
 </template>
@@ -180,6 +186,82 @@ export default {
         console.log(e);
       });
       return true;
+    },
+    forgetPwd() {
+      this.$createDialog({
+        type: 'prompt',
+        title: '请输入注册邮箱',
+        prompt: {
+          placeholder: '请输入注册邮箱',
+          type: 'email',
+        },
+        onConfirm: (e, promptValue) => {
+          const re = /^([\w-_]+(?:\.[\w-_]+)*)@((?:[a-z0-9]+(?:-[a-zA-Z0-9]+)*)+\.[a-z]{2,6})$/i;
+          if (promptValue && re.test(promptValue)) {
+            const body = {
+              email: promptValue,
+            };
+            api.checkEmail(body).then(({ data }) => {
+              if (data.Code === 200) {
+                this.$createToast({
+                  type: 'correct',
+                  time: 1000,
+                  txt: data.Msg,
+                }).show();
+                this.sendNewPwd(promptValue);
+              } else {
+                this.$createToast({
+                  type: 'warn',
+                  time: 1000,
+                  txt: data.Msg,
+                }).show();
+              }
+            }).catch((error) => {
+              console.log(error);
+              this.errorToast.show();
+            });
+          } else {
+            this.$createToast({
+              type: 'warn',
+              time: 1000,
+              txt: '邮箱格式错误',
+            }).show();
+          }
+        },
+      }, false).show();
+    },
+    // 发送新密码
+    sendNewPwd(email) {
+      const newPwdDialog = this.$createDialog({
+        type: 'prompt',
+        title: '输入验证码',
+        prompt: {
+          placeholder: '请输入验证码',
+        },
+        onConfirm: (e, inputValue) => {
+          const body = {
+            emailCode: inputValue,
+            email,
+          };
+          api.checkCode(body).then(({ data }) => {
+            if (data.Code === 200) {
+              this.$createToast({
+                type: 'correct',
+                time: 2000,
+                txt: data.Msg,
+              }).show();
+            } else {
+              this.$createToast({
+                type: 'warn',
+                time: 2000,
+                txt: data.Msg,
+              }).show();
+              newPwdDialog.show();
+            }
+          });
+        },
+      }, false);
+      newPwdDialog.show();
     },
   },
   created() {

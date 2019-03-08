@@ -91,4 +91,20 @@ export default {
       url: '/api/loginOut',
     });
   },
+  // 判断邮箱是否已经注册
+  checkEmail(body) {
+    return axios({
+      method: 'post',
+      url: '/api/checkEmail',
+      data: body,
+    });
+  },
+  // 判断邮箱验证码是否正确
+  checkCode(body) {
+    return axios({
+      method: 'post',
+      url: '/api/checkCode',
+      data: body,
+    });
+  },
 };
