@@ -244,7 +244,10 @@ export default {
       api.checkCaptcha(this.formItem.code).then((respones) => {
         if (respones.data.Code === 200) {
           this.emailCodeLoding = true;
-          api.sendEmailCode().then(({ data }) => {
+          const body = {
+            email: this.formItem.email,
+          };
+          api.sendEmailCode(body).then(({ data }) => {
             if (data.Code === 200) {
               this.$createToast({
                 txt: '发送成功',
