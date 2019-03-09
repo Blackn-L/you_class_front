@@ -130,7 +130,12 @@ export default {
   },
   methods: {
     getClassList() {
-      api.getClassList().then(({ data }) => {
+      const body = {
+        // 16年球季学期
+        yearId: '36',
+        termId: '2',
+      };
+      api.getClassList(body).then(({ data }) => {
         if (data.Code === 200) {
           console.log(data.Data);
           this.classLists = data.Data;

@@ -2,10 +2,11 @@ import axios from 'axios';
 
 export default {
   // 获取课程表列表
-  getClassList() {
+  getClassList(body) {
     return axios({
-      method: 'get',
+      method: 'post',
       url: '/api/getClassList',
+      data: body,
     });
   },
 };
