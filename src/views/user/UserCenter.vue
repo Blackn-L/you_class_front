@@ -8,14 +8,105 @@
       id="UserCenter"
       slot="content"
     >
-      <div class="row">
+      <cube-form>
+        <cube-form-group>
+          <cube-form-item
+            :field="fields[0]"
+            class="form"
+          >
+            <cube-input
+              disabled
+              v-model="userInfo.createTime"
+              placeholder="信息待补充"
+            >
+            </cube-input>
+          </cube-form-item>
+          <cube-form-item
+            :field="fields[1]"
+            class="form"
+          >
+            <cube-input
+              v-model="userInfo.username"
+              :disabled='!canEdit'
+              placeholder="信息待补充"
+            >
+            </cube-input>
+          </cube-form-item>
+          <cube-form-item
+            :field="fields[2]"
+            class="form"
+          >
+            <cube-input
+              v-model="userInfo.email"
+              :disabled='!canEdit'
+              placeholder="信息待补充"
+            >
+            </cube-input>
+          </cube-form-item>
+          <cube-form-item
+            :field="fields[3]"
+            class="form"
+          >
+            <cube-input
+              v-model="userInfo.mobile"
+              :disabled='!canEdit'
+              placeholder="信息待补充"
+              type="number"
+            >
+            </cube-input>
+          </cube-form-item>
+          <cube-form-item
+            :field="fields[4]"
+            class="form"
+          >
+            <cube-input
+              v-model="userInfo.wechat"
+              :disabled='!canEdit'
+              placeholder="信息待补充"
+            >
+            </cube-input>
+          </cube-form-item>
+          <cube-form-item
+            :field="fields[5]"
+            class="form"
+          >
+            <cube-input
+              v-model="userInfo.studentId"
+              disabled
+              placeholder="信息待补充"
+            >
+            </cube-input>
+          </cube-form-item>
+          <cube-form-item
+            :field="fields[6]"
+            class="form"
+          >
+            <cube-switch v-model="canEdit">
+            </cube-switch>
+          </cube-form-item>
+          <cube-form-item
+            :field="fields[7]"
+            class="form"
+          >
+            <cube-switch v-model="toUpdatePwd">
+            </cube-switch>
+          </cube-form-item>
+          <cube-form-item
+            :field="fields[8]"
+            class="form"
+          >
+            <cube-switch v-model="toUpdateStuInfo">
+            </cube-switch>
+          </cube-form-item>
+        </cube-form-group>
+      </cube-form>
+      <!-- <div class="row">
         <cube-input
           disabled
           v-model="userInfo.createTime"
           placeholder="信息待补充"
           class="row-input"
         >
-
         </cube-input>
         <div slot="prepend">
           <span style="font-size: 16px">
@@ -30,7 +121,6 @@
           placeholder="信息待补充"
           class="row-input"
         >
-
         </cube-input>
         <div slot="prepend">
           <span style="font-size: 16px">
@@ -45,7 +135,6 @@
           placeholder="信息待补充"
           class="row-input"
         >
-
         </cube-input>
         <div slot="prepend">
           <span style="font-size: 16px">
@@ -62,7 +151,6 @@
           type="number"
           class="row-input"
         >
-
         </cube-input>
         <div slot="prepend">
           <span style="font-size: 16px">
@@ -77,7 +165,6 @@
           placeholder="信息待补充"
           class="row-input"
         >
-
         </cube-input>
         <div slot="prepend">
           <span style="font-size: 16px">
@@ -92,15 +179,14 @@
           placeholder="信息待补充"
           class="row-input"
         >
-
         </cube-input>
         <div slot="prepend">
           <span style="font-size: 16px">
             教务账号
           </span>
         </div>
-      </div>
-      <div
+      </div> -->
+      <!-- <div
         class="row-footer"
         style="display: flex; align-items: center;"
       >
@@ -118,22 +204,23 @@
         >
           修改教务信息
         </cube-button>
-      </div>
+      </div> -->
       <div
         class="row-footer"
         style="display: flex; align-items: center;"
       >
-        <cube-switch
+        <!-- <cube-switch
           v-model="canEdit"
           style="width:30%; float: left; margin:0 10%"
         >
-        </cube-switch>
+        </cube-switch> -->
         <cube-button
-          style="width:40%; float: right; margin-right: 10%;"
           :disabled="!canEdit"
+          :primary="true"
           @click="save"
         >
-          {{canEdit ? '保存' : '滑动编辑'}}
+          <!-- {{canEdit ? '保存' : '滑动编辑'}} -->
+          保存
         </cube-button>
       </div>
       <div class="row-footer">
@@ -157,7 +244,47 @@ export default {
   },
   data() {
     return {
+      fields: [
+        {
+          type: 'input',
+          label: '注册时间：',
+        },
+        {
+          type: 'input',
+          label: '用户名：',
+        },
+        {
+          type: 'input',
+          label: '注册邮箱：',
+        },
+        {
+          type: 'input',
+          label: '手机号：',
+        },
+        {
+          type: 'input',
+          label: '微信：',
+        },
+        {
+          type: 'input',
+          label: '教务账号：',
+        },
+        {
+          type: 'input',
+          label: '滑动编辑：',
+        },
+        {
+          type: 'input',
+          label: '修改密码：',
+        },
+        {
+          type: 'input',
+          label: '修改教务：',
+        },
+      ],
       canEdit: false, // 能否修改
+      toUpdatePwd: false, // 修改密码
+      toUpdateStuInfo: false, // 修改教务信息
       userInfo: {
         uid: null, // 用户ID
         username: null,
@@ -214,6 +341,8 @@ export default {
           type: 'password',
         },
         onConfirm: (e, promptValue) => {
+          // 还原滑动开关
+          this.toUpdatePwd = false;
           if (promptValue && promptValue.length >= 8) {
             const body = {
               password: promptValue,
@@ -239,6 +368,10 @@ export default {
               txt: '密码错误！',
             }).show();
           }
+        },
+        onCancel: () => {
+          // 还原滑动开关
+          this.toUpdatePwd = false;
         },
       }, false).show();
     },
@@ -303,6 +436,8 @@ export default {
           clearable: { visible: true, blurHidden: true },
         },
         onConfirm: (e, inputValue) => {
+          // 还原滑动开关
+          this.toUpdateStuInfo = false;
           if (inputValue && inputValue.length > 0) {
             this.updateStuPwd(inputValue);
           } else {
@@ -312,6 +447,10 @@ export default {
               txt: '请输入正确的教务账号',
             }).show();
           }
+        },
+        onCancel: () => {
+          // 还原滑动开关
+          this.toUpdateStuInfo = false;
         },
       }, false).show();
     },
@@ -363,6 +502,9 @@ export default {
     },
     // 保存个人信息修改
     save() {
+      if (!this.canEdit) {
+        return;
+      }
       const reMobile = /^1[0-9]{10}$/;
       if (this.userInfo.mobile && !reMobile.test(this.userInfo.mobile)) {
         this.$createToast({
@@ -423,6 +565,19 @@ export default {
   created() {
     this.getUserInfo();
   },
+  watch: {
+    // 监听滑动开关变化，为true则跳出弹窗
+    toUpdatePwd(newVal) {
+      if (newVal) {
+        this.updatePwd();
+      }
+    },
+    toUpdateStuInfo(newVal) {
+      if (newVal) {
+        this.updateStuInfo();
+      }
+    },
+  },
 };
 
 </script>
@@ -432,12 +587,15 @@ export default {
   margin: 0.4rem 0.625rem;
   border-radius: 0.2rem;
 }
+.form {
+  margin: 0 0.625rem;
+}
 .row-input {
   width: 70%;
   float: right;
   margin: 0 0.1rem;
 }
 .row-footer {
-  margin: 0.6rem 0.625rem;
+  margin: 0.45rem 0.625rem;
 }
 </style>
