@@ -9,4 +9,12 @@ export default {
       data: body,
     });
   },
+  // 获取课程成绩
+  getMark(body) {
+    return axios({
+      method: 'post',
+      url: '/api/getStuMark',
+      data: body,
+    });
+  },
 };
