@@ -1,5 +1,5 @@
 <template>
-  <page title="课程表">
+  <page>
     <div
       slot="content"
       id="main"

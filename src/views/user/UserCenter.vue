@@ -1,8 +1,5 @@
 <template>
-  <page
-    title="用户中心"
-    :desc="userInfo.lastLoginIp"
-  >
+  <page :desc="userInfo.lastLoginIp">
     <div
       id="UserCenter"
       slot="content"
