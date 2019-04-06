@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import api from '@/api/mainClass';
+import api from '@/api/schedule';
 import Page from '@/components/Page.vue';
 
 export default {

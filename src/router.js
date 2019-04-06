@@ -7,7 +7,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/main',
+      redirect: '/schedule',
     },
     {
       path: '/account/:type',
@@ -20,9 +20,9 @@ export default new Router({
       component: () => import('@/views/user/UserCenter.vue'),
     },
     {
-      path: '/main',
-      name: 'main',
-      component: () => import('@/views/Main.vue'),
+      path: '/schedule',
+      name: 'schedule',
+      component: () => import('@/views/schedule/Index.vue'),
     },
   ],
 });
