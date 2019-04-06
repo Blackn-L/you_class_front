@@ -27,11 +27,11 @@
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-      default: '',
-      required: true,
-    },
+    // title: {
+    //   type: String,
+    //   default: '',
+    //   required: true,
+    // },
     type: {
       type: String,
       default: '',
@@ -88,20 +88,20 @@ export default {
   }
 
   >.wrapper {
-    height: calc(100% - 44px);
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
 
     // -webkit-overflow-scrolling: touch
     .desc {
-      padding: 10px;
-      margin: 10px 0;
-      line-height: 20px;
+      padding: 6px;
+      margin: 3px 0;
+      line-height: 10px;
       font-size: 14px;
     }
 
     .content {
-      margin: 10px;
+      margin: 8px;
     }
   }
 
