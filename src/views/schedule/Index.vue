@@ -136,9 +136,6 @@ export default {
         if (data.Code === 200) {
           console.log(data.Data);
           this.classLists = data.Data;
-        //   api.getMark(body).then((res) => {
-        //     console.log(res.data);
-        //   });
         } else {
           this.$createToast({
             type: 'warn',
