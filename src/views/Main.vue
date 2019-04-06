@@ -24,7 +24,7 @@
       <div
         class="rows"
         v-for="item in list"
-        :key="item"
+        :key="item.session"
       >
         <div class="line"></div>
         <el-row
