@@ -3,7 +3,6 @@
     title="用户中心"
     :desc="userInfo.lastLoginIp"
   >
-
     <div
       id="UserCenter"
       slot="content"
@@ -100,126 +99,15 @@
           </cube-form-item>
         </cube-form-group>
       </cube-form>
-      <!-- <div class="row">
-        <cube-input
-          disabled
-          v-model="userInfo.createTime"
-          placeholder="信息待补充"
-          class="row-input"
-        >
-        </cube-input>
-        <div slot="prepend">
-          <span style="font-size: 16px">
-            注册时间
-          </span>
-        </div>
-      </div>
-      <div class="row">
-        <cube-input
-          v-model="userInfo.username"
-          :disabled='!canEdit'
-          placeholder="信息待补充"
-          class="row-input"
-        >
-        </cube-input>
-        <div slot="prepend">
-          <span style="font-size: 16px">
-            用户名
-          </span>
-        </div>
-      </div>
-      <div class="row">
-        <cube-input
-          v-model="userInfo.email"
-          :disabled='!canEdit'
-          placeholder="信息待补充"
-          class="row-input"
-        >
-        </cube-input>
-        <div slot="prepend">
-          <span style="font-size: 16px">
-            绑定邮箱
-          </span>
-        </div>
-      </div>
-
-      <div class="row">
-        <cube-input
-          v-model="userInfo.mobile"
-          :disabled='!canEdit'
-          placeholder="信息待补充"
-          type="number"
-          class="row-input"
-        >
-        </cube-input>
-        <div slot="prepend">
-          <span style="font-size: 16px">
-            手机号
-          </span>
-        </div>
-      </div>
-      <div class="row">
-        <cube-input
-          v-model="userInfo.wechat"
-          :disabled='!canEdit'
-          placeholder="信息待补充"
-          class="row-input"
-        >
-        </cube-input>
-        <div slot="prepend">
-          <span style="font-size: 16px">
-            微信
-          </span>
-        </div>
-      </div>
-      <div class="row">
-        <cube-input
-          v-model="userInfo.studentId"
-          disabled
-          placeholder="信息待补充"
-          class="row-input"
-        >
-        </cube-input>
-        <div slot="prepend">
-          <span style="font-size: 16px">
-            教务账号
-          </span>
-        </div>
-      </div> -->
-      <!-- <div
-        class="row-footer"
-        style="display: flex; align-items: center;"
-      >
-        <cube-button
-          @click="updatePwd"
-          light
-          style="margin: 0 20px;"
-        >
-          修改密码
-        </cube-button>
-        <cube-button
-          @click="updateStuInfo"
-          light
-          style="margin: 0 20px;"
-        >
-          修改教务信息
-        </cube-button>
-      </div> -->
       <div
         class="row-footer"
         style="display: flex; align-items: center;"
       >
-        <!-- <cube-switch
-          v-model="canEdit"
-          style="width:30%; float: left; margin:0 10%"
-        >
-        </cube-switch> -->
         <cube-button
           :disabled="!canEdit"
           :primary="true"
           @click="save"
         >
-          <!-- {{canEdit ? '保存' : '滑动编辑'}} -->
           保存
         </cube-button>
       </div>
