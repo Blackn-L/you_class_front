@@ -3,13 +3,13 @@
     class="cube-page"
     :class="type"
   >
-    <header class="header">
+    <!-- <header class="header">
       <h1>{{title}}</h1>
       <i
         @click="back"
         class="cubeic-back"
       ></i>
-    </header>
+    </header> -->
     <div class="wrapper">
       <section
         v-show="desc"
@@ -55,7 +55,6 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus">
 .cube-page {
-  position: absolute;
   z-index: 10;
   top: 0;
   left: 0;
