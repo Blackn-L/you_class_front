@@ -433,6 +433,7 @@ export default {
             txt: '退出成功',
             type: 'success',
           }).show();
+          localStorage.removeItem('email');
           setTimeout(() => {
             this.$router.push({
               name: 'account',

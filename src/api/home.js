@@ -1,11 +1,10 @@
 import axios from 'axios';
 
 export default {
-  // 获取课程表列表
-  getClassList(body) {
+  getMark(body) {
     return axios({
       method: 'post',
-      url: '/api/getClassList',
+      url: 'api/getStuMark',
       data: body,
     });
   },

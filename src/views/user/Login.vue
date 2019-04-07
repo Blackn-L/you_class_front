@@ -168,6 +168,7 @@ export default {
             txt: '登陆成功',
             type: 'success',
           }).show();
+          localStorage.setItem('email', this.formItem.email);
           this.$router.push({
             name: 'user_center',
           });
