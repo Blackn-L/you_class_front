@@ -82,7 +82,6 @@ export default {
 
   data() {
     return {
-    //   canSearch: false,
       yearTitle: '请选择学年',
       yearList: [
         {
