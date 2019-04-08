@@ -1,9 +1,9 @@
 <template>
-  <page :desc="userInfo.lastLoginIp">
-    <div
-      id="UserCenter"
-      slot="content"
-    >
+  <page
+    :desc="userInfo.lastLoginIp"
+    id="usercenter"
+  >
+    <div slot="content">
       <cube-form>
         <cube-form-group>
           <cube-form-item
@@ -469,6 +469,9 @@ export default {
 </script>
 
 <style scoped>
+#usercenter {
+  height: 100%;
+}
 .row {
   margin: 0.4rem 0.625rem;
   border-radius: 0.2rem;

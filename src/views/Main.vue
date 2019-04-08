@@ -1,5 +1,8 @@
 <template>
-  <div id="main">
+  <div
+    id="main"
+    class="fullHeight"
+  >
     <cube-tab-bar
       class="tabs"
       v-model="defaultTab"
@@ -18,6 +21,7 @@
 
     <cube-tab-panels v-model="defaultTab">
       <cube-tab-panel
+        class="fullHeight"
         v-for="item in tabs"
         :label="item.label"
         :key="item.value"
@@ -26,7 +30,7 @@
         <div
           v-if="$route.name === item.value"
           ref="routerView"
-          class="routerStyle"
+          class="fullHeight"
         >
           <router-view></router-view>
         </div>
@@ -79,9 +83,9 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.routerStyle {
-  height: 600px;
+<style lang="less">
+.fullHeight {
+  height: 100%;
 }
 .tabs {
   font-size: 0.4rem;

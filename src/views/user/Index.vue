@@ -4,7 +4,10 @@
     title="注册/登陆"
   >
 
-    <div slot="content">
+    <div
+      slot="content"
+      class="container"
+    >
       <cube-tab-bar
         v-model="selectedLabel"
         show-slider
@@ -66,5 +69,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less">
+#index {
+  height: 100%;
+  .container {
+    margin-top: 2.375rem;
+  }
+}
 </style>
