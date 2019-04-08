@@ -9,7 +9,7 @@
         align="middle"
         justify="space-between"
       >
-        <el-col :span="2">3月</el-col>
+        <el-col :span="2">{{ curretnMonth }}</el-col>
         <el-col :span="21">
           <el-row>
             <el-col
@@ -123,6 +123,12 @@ export default {
         txt: '网络错误！',
       }, false), // api请求，网络错误提示
     };
+  },
+  computed: {
+    curretnMonth() {
+      const date = new Date();
+      return `${date.getMonth() + 1}月`;
+    },
   },
   methods: {
     getClassList() {
