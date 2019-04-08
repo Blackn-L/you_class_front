@@ -4,6 +4,11 @@
       slot="content"
       id="main"
     >
+      <div class="header">
+        <a @click="lastTerm">上一学期</a>
+        <span>{{termTitle}}</span>
+        <a @click="nextTerm">下一学期</a>
+      </div>
       <el-row
         type='flex'
         align="middle"
@@ -64,6 +69,14 @@ export default {
 
   data() {
     return {
+      currentTime: {
+        year: '',
+        month: '',
+      },
+      termInfo: {
+        yearId: '39', // 学年 当前年份+20
+        termId: '1', // 学期
+      },
       list: [
         {
           session: 'First',
@@ -112,10 +125,6 @@ export default {
           key: 'SAT',
           value: '周六',
         },
-        // {
-        //   key: 'SUN',
-        //   value: '周天',
-        // },
       ],
       errorToast: this.$createToast({
         type: 'warn',
@@ -129,15 +138,28 @@ export default {
       const date = new Date();
       return `${date.getMonth() + 1}月`;
     },
+    termTitle() {
+      let name = '';
+      switch (this.termInfo.termId) {
+        case '1':
+          name = '春季学期';
+          break;
+        case '2':
+          name = '秋季学期';
+          break;
+        case '3':
+          name = '夏季学期';
+          break;
+        default:
+          name = '秋季学期';
+      }
+      const title = `20${this.termInfo.yearId - 20}年${name}`;
+      return title;
+    },
   },
   methods: {
     getClassList() {
-      const body = {
-        // 16年球季学期
-        yearId: '36',
-        termId: '2',
-      };
-
+      const body = this.termInfo;
       api.getClassList(body).then(({ data }) => {
         if (data.Code === 200) {
           console.log(data.Data);
@@ -163,8 +185,70 @@ export default {
         console.log(e);
       });
     },
+    // 计算当前学期
+    checkTerm() {
+      const curDate = new Date();
+      const year = curDate.getFullYear();
+      const month = curDate.getMonth() + 1;
+      let termId = '1';
+      if (month >= 2 && month <= 7) {
+        termId = '1';
+      } else if (month === 8) {
+        termId = '3';
+      } else {
+        termId = '2';
+      }
+      this.currentTime.year = year;
+      this.currentTime.month = month;
+      this.currentTime.term = termId;
+      this.termInfo.termId = termId;
+      this.termInfo.yearId = year - 2000 + 20;
+    },
+    // 上一学期
+    lastTerm() {
+      // 无法查看更入学前的课表，没有啊！
+      if (this.termInfo.yearId + 4 <= this.currentTime.year - 1980) {
+        this.$createToast({
+          type: 'warn',
+          time: 4000,
+          txt: '那会你还没上大学呢！',
+        }, false).show();
+        return;
+      }
+      if (`${this.termInfo.termId}` === '1') {
+        this.termInfo.yearId = this.termInfo.yearId - 1;
+        this.termInfo.termId = '2';
+      } else if (`${this.termInfo.termId}` === '2') {
+        this.termInfo.termId = '3';
+      } else if (`${this.termInfo.termId}` === '3') {
+        this.termInfo.termId = '1';
+      }
+      this.getClassList();
+    },
+    // 下一学期
+    nextTerm() {
+      // 如果显示的课表时间是本学期时间，那么就不能再查看下学期课表
+      if (this.termInfo.yearId >= this.currentTime.year - 1980 && `${this.termInfo.termId}` === `${this.currentTime.term}`) {
+        this.$createToast({
+          type: 'warn',
+          time: 4000,
+          txt: '下学期课表谁都不知道！',
+        }, false).show();
+        return;
+      }
+      if (`${this.termInfo.termId}` === '1') {
+        this.termInfo.termId = '3';
+      } else if (`${this.termInfo.termId}` === '2') {
+        this.termInfo.yearId = this.termInfo.yearId - 0 + 1;
+        this.termInfo.termId = '1';
+      } else if (`${this.termInfo.termId}` === '3') {
+        this.termInfo.termId = '2';
+      }
+      this.getClassList();
+    },
   },
   created() {
+    this.checkTerm();
     this.getClassList();
   },
 };
@@ -173,6 +257,13 @@ export default {
 <style lang="less">
 #main {
   font-size: 16px;
+}
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-bottom: 0.625rem;
+  width: 100%;
 }
 .line {
   width: 100%;
