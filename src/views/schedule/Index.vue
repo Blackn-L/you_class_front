@@ -170,7 +170,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 #main {
   font-size: 16px;
 }
