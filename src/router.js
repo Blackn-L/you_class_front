@@ -36,5 +36,11 @@ export default new Router({
       name: 'account',
       component: () => import('./views/user/Index.vue'),
     },
+    {
+      // 会匹配所有路径
+      path: '*',
+      name: 'NotFound',
+      component: () => import('@/components/404.vue'),
+    },
   ],
 });
