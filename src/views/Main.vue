@@ -58,7 +58,7 @@ export default {
           path: '/schedule',
         },
         {
-          label: '主页',
+          label: '成绩查询',
           value: 'home',
           icon: 'cubeic-home',
           path: '/user/center',
