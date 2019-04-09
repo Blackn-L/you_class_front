@@ -3,13 +3,13 @@
     class="cube-page"
     :class="type"
   >
-    <header class="header">
+    <!-- <header class="header">
       <h1>{{title}}</h1>
       <i
         @click="back"
         class="cubeic-back"
       ></i>
-    </header>
+    </header> -->
     <div class="wrapper">
       <section
         v-show="desc"
@@ -27,11 +27,11 @@
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-      default: '',
-      required: true,
-    },
+    // title: {
+    //   type: String,
+    //   default: '',
+    //   required: true,
+    // },
     type: {
       type: String,
       default: '',
@@ -55,7 +55,6 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus">
 .cube-page {
-  position: absolute;
   z-index: 10;
   top: 0;
   left: 0;
@@ -89,20 +88,20 @@ export default {
   }
 
   >.wrapper {
-    height: calc(100% - 44px);
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
 
     // -webkit-overflow-scrolling: touch
     .desc {
-      padding: 10px;
-      margin: 10px 0;
-      line-height: 20px;
+      padding: 6px;
+      margin: 3px 0;
+      line-height: 10px;
       font-size: 14px;
     }
 
     .content {
-      margin: 10px;
+      margin: 8px;
     }
   }
 
