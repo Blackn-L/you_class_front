@@ -26,6 +26,10 @@
           </el-row>
         </el-col>
       </el-row>
+      <cube-loading
+        :size="48"
+        v-show='loading'
+      ></cube-loading>
       <div
         class="rows"
         v-for="item in list"
@@ -46,6 +50,10 @@
           >
             <p class="courseName">{{day[item.session][0]}}</p>
             <br>
+            <div class="weeks">
+              <p v-if="day[item.session][3] && !day[item.session][4]">{{day[item.session][3]}}</p>
+              <p v-if="day[item.session][4]">{{day[item.session][4]}}</p>
+            </div>
             <span
               v-if="day[item.session][1]"
               class="classroom"
@@ -69,6 +77,7 @@ export default {
 
   data() {
     return {
+      loading: true,
       currentTime: {
         year: '',
         month: '',
@@ -184,6 +193,9 @@ export default {
         this.errorToast.show();
         console.log(e);
       });
+      setTimeout(() => {
+        this.loading = false;
+      }, 1000);
     },
     // 计算当前学期
     checkTerm() {
@@ -223,6 +235,7 @@ export default {
       } else if (`${this.termInfo.termId}` === '3') {
         this.termInfo.termId = '1';
       }
+      this.loading = true;
       this.getClassList();
     },
     // 下一学期
@@ -244,6 +257,7 @@ export default {
       } else if (`${this.termInfo.termId}` === '3') {
         this.termInfo.termId = '2';
       }
+      this.loading = true;
       this.getClassList();
     },
   },
@@ -276,12 +290,19 @@ export default {
 .rows {
   margin: 2px 5px;
   .inRow {
-    margin: 7px 5px 2px 2px;
+    margin: 3px 5px 2px 2px;
     font-size: 14px;
     .courseName {
       color: black;
     }
+    .weeks {
+      margin-top: 2px;
+      p {
+        color: #85312f;
+      }
+    }
     .classroom {
+      margin-top: 4px;
       color: #0c5586;
     }
   }
