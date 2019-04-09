@@ -5,7 +5,7 @@ export default {
   getClassList(body) {
     return axios({
       method: 'post',
-      url: '/api/getClassList',
+      url: `${this.apiStart}/api/getClassList`,
       data: body,
     });
   },

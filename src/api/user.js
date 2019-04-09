@@ -5,7 +5,7 @@ export default {
   register(body) {
     return axios({
       method: 'post',
-      url: '/api/register',
+      url: `${this.apiStart}/api/register`,
       data: body,
     });
   },
@@ -14,7 +14,7 @@ export default {
   login(body) {
     return axios({
       method: 'post',
-      url: '/api/login',
+      url: `${this.apiStart}/api/login`,
       data: body,
     });
   },
@@ -23,7 +23,7 @@ export default {
   getCaptcha() {
     return axios({
       method: 'get',
-      url: '/api/getCaptcha/verify',
+      url: `${this.apiStart}/api/getCaptcha/verify`,
     });
   },
 
@@ -31,7 +31,7 @@ export default {
   checkCaptcha(code) {
     return axios({
       method: 'get',
-      url: `api/getCaptcha/check/${code}`,
+      url: `${this.apiStart}/api/getCaptcha/check/${code}`,
     });
   },
 
@@ -39,7 +39,7 @@ export default {
   sendEmailCode(body) {
     return axios({
       method: 'post',
-      url: '/api/getEmailCode',
+      url: `${this.apiStart}/api/getEmailCode`,
       data: body,
     });
   },
@@ -48,7 +48,7 @@ export default {
   getUserInfo() {
     return axios({
       method: 'get',
-      url: '/api/getUserInfo',
+      url: `${this.apiStart}/api/getUserInfo`,
     });
   },
 
@@ -56,7 +56,7 @@ export default {
   saveUserInfo(body) {
     return axios({
       method: 'post',
-      url: '/api/updateUserInfo',
+      url: `${this.apiStart}/api/updateUserInfo`,
       data: body,
     });
   },
@@ -64,7 +64,7 @@ export default {
   updateStuInfo(body) {
     return axios({
       method: 'post',
-      url: '/api/updateStuInfo',
+      url: `${this.apiStart}/api/updateStuInfo`,
       data: body,
     });
   },
@@ -72,7 +72,7 @@ export default {
   checkPwd(body) {
     return axios({
       method: 'post',
-      url: '/api/checkPwd',
+      url: `${this.apiStart}/api/checkPwd`,
       data: body,
     });
   },
@@ -80,7 +80,7 @@ export default {
   updatePwd(body) {
     return axios({
       method: 'post',
-      url: '/api/updatePwd',
+      url: `${this.apiStart}/api/updatePwd`,
       data: body,
     });
   },
@@ -88,14 +88,14 @@ export default {
   loginOut() {
     return axios({
       method: 'get',
-      url: '/api/loginOut',
+      url: `${this.apiStart}/api/loginOut`,
     });
   },
   // 判断邮箱是否已经注册
   checkEmail(body) {
     return axios({
       method: 'post',
-      url: '/api/checkEmail',
+      url: `${this.apiStart}/api/checkEmail`,
       data: body,
     });
   },
@@ -103,7 +103,7 @@ export default {
   checkCode(body) {
     return axios({
       method: 'post',
-      url: '/api/checkCode',
+      url: `${this.apiStart}/api/checkCode`,
       data: body,
     });
   },

@@ -47,12 +47,8 @@ module.exports = {
 
   devServer: {
     proxy: {
-      '/api': {
-        target: 'http://api.svip52.com/index.php',
-        // target: 'http://jw.tt', // 本地
-        ws: true,
-        changeOrigin: true,
-      },
+      target: 'http://api.svip52.com/',
+      // target: 'http://jw.tt', // 本地
     },
   },
   css: {

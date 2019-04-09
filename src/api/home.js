@@ -4,7 +4,7 @@ export default {
   getMark(body) {
     return axios({
       method: 'post',
-      url: 'api/getStuMark',
+      url: `${this.apiStart}/api/getStuMark`,
       data: body,
     });
   },
