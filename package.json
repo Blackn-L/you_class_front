@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --port 8081 --open --host 192.168.1.101",
+    "serve": "vue-cli-service serve --port 8081 --open --host 192.168.50.175",
+    "serve1": "vue-cli-service serve --port 8081 --open --host 192.168.1.101",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
