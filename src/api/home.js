@@ -8,4 +8,10 @@ export default {
       data: body,
     });
   },
+  getCredit() {
+    return axios({
+      method: 'get',
+      url: 'api/getCredit',
+    });
+  },
 };
